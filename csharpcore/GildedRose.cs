@@ -20,16 +20,16 @@ namespace csharpcore
                 }
                 else
                 {
-                    TratandoItensQueNaoPerdemQualidade(i);
+                    AumentandoQualidadeDeItens(i);
                 }
 
-                TratandoItensLendarios(i);
+                DiminuindoDiasRestantesParaVenda(i);
 
                 TratandoItensVencidos(i);
             }
         }
 
-        private void TratandoItensQueNaoPerdemQualidade(int i)
+        private void AumentandoQualidadeDeItens(int i)
         {
             if (Items[i].Quality < 50)
             {
@@ -56,7 +56,7 @@ namespace csharpcore
             }
         }
 
-        private void TratandoItensLendarios(int i)
+        private void DiminuindoDiasRestantesParaVenda(int i)
         {
             if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
             {
@@ -71,12 +71,16 @@ namespace csharpcore
                 if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                 {
                     Items[i].Quality = Items[i].Quality - 1;
-
-                    if (Items[i].Name == "Conjured Mana Cake")
-                    {
-                        Items[i].Quality = Items[i].Quality - 1;
-                    }
+                    DiminuindoQualidadeDeConjured(i);
                 }
+            }
+        }
+
+        private void DiminuindoQualidadeDeConjured(int i)
+        {
+            if (Items[i].Name == "Conjured Mana Cake")
+            {
+                Items[i].Quality = Items[i].Quality - 1;
             }
         }
 
@@ -94,10 +98,7 @@ namespace csharpcore
                             {
                                 Items[i].Quality = Items[i].Quality - 1;
                             }
-                            if (Items[i].Name == "Conjured Mana Cake")
-                            {
-                                Items[i].Quality = Items[i].Quality - 1;
-                            }
+                            DiminuindoQualidadeDeConjured(i);
                         }
                     }
                     else

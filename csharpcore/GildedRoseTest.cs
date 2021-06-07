@@ -106,6 +106,49 @@ namespace csharpcore
             Assert.Equal(50, Items[0].Quality);
         }
 
+        // A qualidade (quality) de (Backstage Passes) aumenta em 2 unidades quando a data de venda (SellIn) é igual ou menor que 10.
+        [Trait("GildedRose", "UpdateQuality")]
+        [Fact(DisplayName = "Deveria Aumentar a Qualidade De Backstage Passes Vezes Dois Quando SellIn For Menor Ou Igual A Dez")]
+        public void DeveriaAumentarAQualidadeDeBackstagePassesVezesDoisQuandoSellInForMenorOuIgualADez()
+        {
+            //Arrange
+            IList<Item> Items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 9, Quality = 48 } };
+            GildedRose app = new GildedRose(Items);
+            //Act
+            app.UpdateQuality();
+            //Assert
+            Assert.Equal(50, Items[0].Quality);
+        }
+
+        // A qualidade (quality) de (Backstage Passes) aumenta em 3 unidades quando a data de venda (SellIn) é igual ou menor que 5.
+        [Trait("GildedRose", "UpdateQuality")]
+        [Fact(DisplayName = "Deveria Aumentar a Qualidade De Backstage Passes Vezes Tres Quando SellIn For Menor Ou Igual A Cinco")]
+        public void DeveriaAumentarAQualidadeDeBackstagePassesVezesTresQuandoSellInForMenorOuIgualADez()
+        {
+            //Arrange
+            IList<Item> Items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 4, Quality = 47 } };
+            GildedRose app = new GildedRose(Items);
+            //Act
+            app.UpdateQuality();
+            //Assert
+            Assert.Equal(50, Items[0].Quality);
+        }
+
+        // A qualidade (quality) do item vai direto à 0 quando a data de venda (SellIn) tiver passado.
+        [Trait("GildedRose", "UpdateQuality")]
+        [Fact(DisplayName = "Deveria Aumentar a Qualidade De Backstage Passes Vezes Tres Quando SellIn For Menor Ou Igual A Cinco")]
+        public void DeveriaZerarAQualidadeQuandoDataDeSellInTerminar()
+        {
+            //Arrange
+            IList<Item> Items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 47 } };
+            GildedRose app = new GildedRose(Items);
+            //Act
+            app.UpdateQuality();
+            //Assert
+            Assert.Equal(0, Items[0].Quality);
+        }
+
+
         //Os itens "Conjurados" (Conjured) diminuem a qualidade (quality) duas vezes mais rápido que os outros itens.
         [Trait("GildedRose", "UpdateQuality")]
         [Fact(DisplayName = "Deveria Diminuir a Qualidade De Conjured Duas Vezes Mais Rapido")]
