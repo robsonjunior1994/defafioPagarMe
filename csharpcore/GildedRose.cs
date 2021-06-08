@@ -29,6 +29,18 @@ namespace csharpcore
             }
         }
 
+        private void DiminuindoQualidadeDosItens(int i)
+        {
+            if (Items[i].Quality > 0)
+            {
+                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                {
+                    Items[i].Quality = Items[i].Quality - 1;
+                    DiminuindoQualidadeDeConjured(i);
+                }
+            }
+        }
+
         private void AumentandoQualidadeDeItens(int i)
         {
             if (Items[i].Quality < 50)
@@ -58,29 +70,20 @@ namespace csharpcore
 
         private void DiminuindoDiasRestantesParaVenda(int i)
         {
+            /*
+             * Um ponto que observei é que sulfuras não precisa ter uma data de venda (SellIn) segundo os requisitos. Mas na linha 17 da classe Program é iniciado um (Sulfuras) com o valor -1 em SellIn ou seja, como se tivesse passado a data de venda, eu pensei em colocar uma verificação. Se SellIn > 0, ele modificaria SellIn para 0.
+               Se essa situação fosse real eu levaria essa discussão para a equipe pensar um pouco comigo.
+             
+
+             */
+            //if (Items[i].Name == "Sulfuras, Hand of Ragnaros")
+            //{
+            //    Items[i].SellIn = 0;
+            //}
+
             if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
             {
                 Items[i].SellIn = Items[i].SellIn - 1;
-            }
-        }
-
-        private void DiminuindoQualidadeDosItens(int i)
-        {
-            if (Items[i].Quality > 0)
-            {
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    Items[i].Quality = Items[i].Quality - 1;
-                    DiminuindoQualidadeDeConjured(i);
-                }
-            }
-        }
-
-        private void DiminuindoQualidadeDeConjured(int i)
-        {
-            if (Items[i].Name == "Conjured Mana Cake")
-            {
-                Items[i].Quality = Items[i].Quality - 1;
             }
         }
 
@@ -115,5 +118,14 @@ namespace csharpcore
                 }
             }
         }
+
+        private void DiminuindoQualidadeDeConjured(int i)
+        {
+            if (Items[i].Name == "Conjured Mana Cake")
+            {
+                Items[i].Quality = Items[i].Quality - 1;
+            }
+        }
+
     }
 }
