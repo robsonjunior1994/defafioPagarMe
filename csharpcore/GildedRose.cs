@@ -16,20 +16,20 @@ namespace csharpcore
             {
                 if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                 {
-                    DiminuindoQualidadeDosItens(i);
+                    DiminuindoQualidadeDoItem(i);
                 }
                 else
                 {
-                    AumentandoQualidadeDeItens(i);
+                    AumentandoQualidadeDoItem(i);
                 }
 
                 DiminuindoDiasRestantesParaVenda(i);
 
-                TratandoItensVencidos(i);
+                TratandoItemVencidos(i);
             }
         }
 
-        private void DiminuindoQualidadeDosItens(int i)
+        private void DiminuindoQualidadeDoItem(int i)
         {
             if (Items[i].Quality > 0)
             {
@@ -41,7 +41,7 @@ namespace csharpcore
             }
         }
 
-        private void AumentandoQualidadeDeItens(int i)
+        private void AumentandoQualidadeDoItem(int i)
         {
             if (Items[i].Quality < 50)
             {
@@ -51,18 +51,12 @@ namespace csharpcore
                 {
                     if (Items[i].SellIn < 11)
                     {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        AdicionandoMaisUmNaAQualidadeDoItem(i);
                     }
 
                     if (Items[i].SellIn < 6)
                     {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        AdicionandoMaisUmNaAQualidadeDoItem(i);
                     }
                 }
             }
@@ -87,7 +81,7 @@ namespace csharpcore
             }
         }
 
-        private void TratandoItensVencidos(int i)
+        private void TratandoItemVencidos(int i)
         {
             if (Items[i].SellIn < 0)
             {
@@ -95,14 +89,7 @@ namespace csharpcore
                 {
                     if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        if (Items[i].Quality > 0)
-                        {
-                            if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                            {
-                                Items[i].Quality = Items[i].Quality - 1;
-                            }
-                            DiminuindoQualidadeDeConjured(i);
-                        }
+                        DiminuindoQualidadeDoItem(i);
                     }
                     else
                     {
@@ -111,11 +98,16 @@ namespace csharpcore
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-                    }
+                    AdicionandoMaisUmNaAQualidadeDoItem(i);
                 }
+            }
+        }
+
+        private void AdicionandoMaisUmNaAQualidadeDoItem(int i)
+        {
+            if (Items[i].Quality < 50)
+            {
+                Items[i].Quality = Items[i].Quality + 1;
             }
         }
 
